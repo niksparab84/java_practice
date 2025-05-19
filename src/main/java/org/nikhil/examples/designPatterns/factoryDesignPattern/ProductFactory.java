@@ -5,6 +5,8 @@ package org.nikhil.examples.designPatterns.factoryDesignPattern;
     * Creational pattern
     * It provides a way to create objects without specifying their exact class.
     * It defines an interface for creating objects, but the specific type of object is determined by the subclass.
+    * By using the factory pattern, we can create objects in a centralized way, which makes it easier to manage object creation
+    * and reduces code duplication.
  */
 
 // Product interface
@@ -29,7 +31,7 @@ class ConcreteProductB implements Product {
 
 // Factory class
 public class ProductFactory {
-    public Product createProduct(String type) {
+    public static Product createProduct(String type) {
         if (type == null || type.isEmpty()) {
             return null;
         }
@@ -43,14 +45,14 @@ public class ProductFactory {
 
     // Main class to test the Factory Design Pattern
     public static void main(String[] args) {
-        ProductFactory factory = new ProductFactory();
+        //ProductFactory factory = ProductFactory.createProduct();
 
         // Create Product A
-        Product productA = factory.createProduct("A");
+        Product productA = ProductFactory.createProduct("A");
         productA.create();
 
         // Create Product B
-        Product productB = factory.createProduct("B");
+        Product productB = ProductFactory.createProduct("B");
         productB.create();
     }
 }

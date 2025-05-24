@@ -11,7 +11,7 @@ public class BlockingQueueDemo {
     //Refer: https://www.netjstech.com/2016/03/linkedblockingqueue-in-java.html
 
     //BlockingQueue is a type of Queue that is thread-safe and supports operations that wait for the queue to become non-empty when retrieving an element
-    // and wait for space to become available in the queue when storing an element.
+    //and wait for space to become available in the queue when storing an element.
     //It is part of the java.util.concurrent package and is commonly used in producer-consumer scenarios.
     //BlockingQueue is an interface that extends the Queue interface and provides additional methods for blocking operations.
     //It is important to note that BlockingQueue is not a thread-safe implementation of the Queue interface, but rather a higher-level abstraction that provides thread-safety.
@@ -22,8 +22,9 @@ public class BlockingQueueDemo {
         LinkBuffer buffer = new LinkBuffer();
         // Starting two threads
         ExecutorService executor = Executors.newFixedThreadPool(2);
-        executor.execute(new LinkProdTask(buffer));
-        executor.execute(new LinkConTask(buffer));
+
+        executor.submit(new LinkProdTask(buffer));
+        executor.submit(new LinkConTask(buffer));
         executor.shutdown();
     }
 
@@ -32,7 +33,7 @@ public class BlockingQueueDemo {
 /**
  * Producer class
  */
-class LinkProdTask implements Runnable{
+class LinkProdTask implements Runnable {
     LinkBuffer buffer;
     LinkProdTask(LinkBuffer buffer){
         this.buffer = buffer;
@@ -48,7 +49,7 @@ class LinkProdTask implements Runnable{
 /**
  * Consumer Class
  */
-class LinkConTask implements Runnable{
+class LinkConTask implements Runnable {
     LinkBuffer buffer;
     LinkConTask(LinkBuffer buffer){
         this.buffer = buffer;

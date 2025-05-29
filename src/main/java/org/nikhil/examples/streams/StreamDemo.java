@@ -28,6 +28,19 @@ public class StreamDemo {
                 .sorted().collect(Collectors.toList());
         System.out.println("evenList => " + evenList);
 
+        //with Exception Handling
+        List<Integer> safeEvenList = myList2.stream()
+                .filter(n -> {
+                    try {
+                        return n % 2 == 0;
+                    } catch (Exception e) {
+                        System.out.println("Exception occurred: " + e.getMessage());
+                        return false;
+                    }
+                })
+                .sorted().collect(Collectors.toList());
+        System.out.println("safeEvenList => " + safeEvenList);
+
         List<Integer> evenSqrList = myList2.stream()
                 .filter(n -> n % 2 == 0)
                 .map(n -> n * n)

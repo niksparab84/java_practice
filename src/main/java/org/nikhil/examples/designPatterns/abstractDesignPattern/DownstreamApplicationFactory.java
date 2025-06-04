@@ -19,14 +19,18 @@ class InternalApplication extends AbstractDownstreamApplication {
     }
 }
 
+enum SystemType {
+    INTERNAL, EXTERNAL, REGULATORY_REPORTING, UNKNOWN
+}
+
 public class DownstreamApplicationFactory {
-    public static DownstreamApplication getDownstreamApplication(String type) {
-        switch (type) {
-            case "Internal":
+    public static DownstreamApplication getDownstreamApplication(SystemType systemType) {
+        switch (systemType) {
+            case INTERNAL:
                 return new InternalApplication();
-            case "External":
+            case EXTERNAL:
                 return new ExternalApplication();
-            case "RegulatoryReporting":
+            case REGULATORY_REPORTING:
                 return new RegulatoryReportingApplication();
             default:
                 return new AbstractDownstreamApplication(); // Default case
@@ -34,16 +38,16 @@ public class DownstreamApplicationFactory {
     }
 
     public static void main(String[] args) {
-        DownstreamApplication internalApp = DownstreamApplicationFactory.getDownstreamApplication("Internal");
+        DownstreamApplication internalApp = DownstreamApplicationFactory.getDownstreamApplication(SystemType.INTERNAL);
         internalApp.publish();
 
-        DownstreamApplication externalApp = DownstreamApplicationFactory.getDownstreamApplication("External");
+        DownstreamApplication externalApp = DownstreamApplicationFactory.getDownstreamApplication(SystemType.EXTERNAL);
         externalApp.publish();
 
-        DownstreamApplication regulatoryApp = DownstreamApplicationFactory.getDownstreamApplication("RegulatoryReporting");
+        DownstreamApplication regulatoryApp = DownstreamApplicationFactory.getDownstreamApplication(SystemType.REGULATORY_REPORTING);
         regulatoryApp.publish();
 
-        DownstreamApplication abstractApp = DownstreamApplicationFactory.getDownstreamApplication("UnknownType");
+        DownstreamApplication abstractApp = DownstreamApplicationFactory.getDownstreamApplication(SystemType.UNKNOWN);
         abstractApp.publish();
     }
 

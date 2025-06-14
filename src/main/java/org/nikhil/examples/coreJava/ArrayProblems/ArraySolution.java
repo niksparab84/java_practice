@@ -26,7 +26,7 @@ public class ArraySolution {
     //Given an array of elements of length N, ranging from 0 to N-1.
     //All elements may not be present in the array. If the element is not present, it is represented by -1.
     //Rearrange the array such that A[i] = i and if i is not present, then A[i] = -1.
-    int[] rearrangeArray(int[] arr) {
+    public int[] rearrangeArray(int[] arr) {
         int n = arr.length;
         int[] result = new int[n];
         System.out.println("Input Array: " + Arrays.toString(arr));

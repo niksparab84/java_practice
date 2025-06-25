@@ -33,8 +33,21 @@ public class StreamUtils {
                 .orElse(null);
     }
 
+    // Find frequency of each character in a string using LinkedHashMap
+    public static LinkedHashMap<Character, Long> findCharacterFrequency(String inputStr) {
+        LinkedHashMap<Character, Long> charFrequencyMap = inputStr.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        LinkedHashMap::new,
+                        Collectors.counting()
+                ));
+        return charFrequencyMap;
+    }
+
     public static void main(String[] args) {
-        String input = "swiss";
+        //String input = "swiss";
+        String input = "Hello World";
         Character firstNonRepeated = findFirstNonRepeatedCharacter(input);
         if (firstNonRepeated != null) {
             System.out.println("First non-repeated character: " + firstNonRepeated);
@@ -48,5 +61,9 @@ public class StreamUtils {
         } else {
             System.out.println("No non-repeated character found using LinkedHashMap.");
         }
+
+        String freqInput = "character frequency example";
+        LinkedHashMap<Character, Long> charFrequencyMap = findCharacterFrequency(freqInput);
+        System.out.println("Character frequency map of string '" + freqInput +  "' is: " + charFrequencyMap);
     }
 }

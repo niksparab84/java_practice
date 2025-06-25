@@ -1,5 +1,8 @@
 package org.nikhil.examples.coreJava.StringChallenges;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class StringChallenges {
 
     //Write a method to Reverse a string — without using built-in methods
@@ -51,6 +54,19 @@ public class StringChallenges {
             char currentChar = str.charAt(i);
             if (!charSet[currentChar]) {
                 charSet[currentChar] = true;
+                result.append(currentChar);
+            }
+        }
+        return result.toString();
+    }
+
+    // other implementation to remove duplicate characters from a string
+    public static String removeDuplicatesUsingSet(String str) {
+        StringBuilder result = new StringBuilder();
+        Set<Character> charSet = new HashSet<>();
+        for (char currentChar : str.toCharArray()) {
+            if (!charSet.contains(currentChar)) {
+                charSet.add(currentChar);
                 result.append(currentChar);
             }
         }

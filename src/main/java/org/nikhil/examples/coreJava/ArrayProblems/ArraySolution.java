@@ -13,10 +13,12 @@ public class ArraySolution {
         System.out.println("Input Array: " + Arrays.toString(arr));
 
         int totalSum = (n * (n + 1)) / 2;
-        int arrSum = 0;
+        /* int arrSum = 0;
         for (int i = 0; i < arr.length; i++) {
             arrSum += arr[i];
-        }
+        } */
+        int arrSum = Arrays.stream(arr).sum();
+
         missingElement = totalSum - arrSum;
         System.out.println("Missing Element is: " + missingElement);
 
@@ -42,4 +44,23 @@ public class ArraySolution {
         System.out.println("Rearranged Array: " + Arrays.toString(result));
         return result;
     }
+
+    public static long maxSubarrayValue(List<Integer> arr) {
+        // Write your code here
+        long maxSum = Long.MIN_VALUE;
+        long currentSum = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            currentSum += arr.get(i);
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+            if (currentSum < 0) {
+                currentSum = 0;
+            }
+        }
+        System.out.println("Max Subarray Value: " + maxSum);
+        return maxSum;
+
+    }
+
 }

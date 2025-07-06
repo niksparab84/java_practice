@@ -22,6 +22,11 @@ public class StreamDemo {
         //.forEach(System.out::println);
         System.out.println("Larger List => " + largerList);
 
+        //Sum of all elements in the list
+        int sum = myList2.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
         System.out.println("List => " + myList2);
         List<Integer> evenList = myList2.stream()
                 .filter(n -> n % 2 == 0)

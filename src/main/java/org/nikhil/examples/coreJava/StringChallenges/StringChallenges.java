@@ -73,5 +73,21 @@ public class StringChallenges {
         return result.toString();
     }
 
-
+    //palindromic algorighms
+    // LexicographicallySmallestPalindrome means that we want to create a palindrome from the given string
+    // such that it is the smallest possible palindrome in lexicographical order.
+    public static String makeLexicographicallySmallestPalindrome(String str) {
+        StringBuilder result = new StringBuilder(str);
+        int n = str.length();
+        for (int i = 0; i < n / 2; i++) {
+            char leftChar = str.charAt(i);
+            char rightChar = str.charAt(n - 1 - i);
+            if (leftChar != rightChar) {
+                char smallerChar = (char) Math.min(leftChar, rightChar);
+                result.setCharAt(i, smallerChar);
+                result.setCharAt(n - 1 - i, smallerChar);
+            }
+        }
+        return result.toString();
+    }
 }

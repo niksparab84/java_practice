@@ -21,6 +21,11 @@ GROUP BY c.category_id, c.category_name, p.product_id, p.product_name
 ORDER BY c.category_id, total_revenue DESC
 LIMIT 3;
 
+select emp.employee_id, emp.employee_name, mgr.employee_name as manager_name
+from  Employee emp, Employee mgr
+where emp.manager_id = mgr.id OR emp.manager_id IS NULL
+order by emp.employee_id;
+
 -- Write a query to find the average order value for each customer.
 SELECT c.customer_id, c.first_name, c.last_name, AVG(o.total_amount) AS average_order_value
 FROM customers c

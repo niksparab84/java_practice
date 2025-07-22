@@ -33,6 +33,16 @@ JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.first_name, c.last_name
 ORDER BY average_order_value DESC;
 
+-- Write a query to find customers whose order value is more than the average order value of all customers.
+SELECT c.customer_id, c.first_name, c.last_name, AVG(o.total_amount) AS average_order_value
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name
+HAVING AVG(o.total_amount) > (
+    SELECT AVG(total_amount)
+    FROM orders
+)
+
 -- Write a query to find products where the total revenue is more than the average revenue of all products.
 SELECT p.product_id, p.product_name, SUM(oi.quantity * oi.price) AS total_revenue
 FROM products p

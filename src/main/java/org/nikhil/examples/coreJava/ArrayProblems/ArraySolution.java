@@ -1,6 +1,7 @@
 package org.nikhil.examples.coreJava.ArrayProblems;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ArraySolution {
 

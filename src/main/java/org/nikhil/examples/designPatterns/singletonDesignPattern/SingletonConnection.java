@@ -10,6 +10,13 @@ public class SingletonConnection {
     // simultaneously. By declaring the instance variable as volatile, we ensure that all threads see the same value
     // of the instance variable, and that the instance is fully constructed before it is accessed.
     // This is important for thread safety and to prevent issues like the "half-constructed" object problem.
+    // here main memory means the main memory of the computer, which is shared by all threads in a Java program.
+    // Is it RAM? Yes, the main memory refers to the RAM (Random Access Memory) of the computer, which is a type of volatile
+    // memory that is used to store data and instructions that are currently being used by the CPU.
+    // In a multi-threaded Java program, all threads share the same main memory, which allows them to communicate and
+    // share data with each other. However, each thread also has its own local cache, which can lead to issues like stale data or
+    // race conditions if not managed properly. By using the volatile keyword, we ensure that all threads see the same value of
+    // the instance variable in main memory, rather than potentially reading from their own local cache.
     private static volatile SingletonConnection instance;
 
     // Private constructor to prevent instantiation

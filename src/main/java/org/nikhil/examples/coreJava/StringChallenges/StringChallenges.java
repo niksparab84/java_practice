@@ -63,7 +63,7 @@ public class StringChallenges {
     // other implementation to remove duplicate characters from a string
     public static String removeDuplicatesUsingSet(String str) {
         StringBuilder result = new StringBuilder();
-        Set<Character> charSet = new HashSet<>();
+        Set<Character> charSet = new HashSet<>(); //Use TreeSet instead for faster navigation
         for (char currentChar : str.toCharArray()) {
             if (!charSet.contains(currentChar)) {
                 charSet.add(currentChar);

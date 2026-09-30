@@ -86,3 +86,11 @@ public class Pizza {
         System.out.println(pizza);
     }
 }
+
+// The Builder Design Pattern is a creational design pattern that provides a step-by-step approach to constructing complex objects.
+// It separates the construction process from the object’s representation, enabling the same method to create different variations of an object.
+// Encapsulates object construction logic in a separate Builder class, enabling flexible and controlled creation.
+// Supports creating different variations of a product using the same construction process.
+// In this example, the `Pizza` class is constructed using a nested static `PizzaBuilder` class, which provides methods to set various properties of the pizza and a method to build the final `Pizza` object.
+// The `PizzaBuilder` class allows for a fluent interface, enabling method chaining to set the properties of the pizza. The `buildPizza()` method constructs and returns the final `Pizza` object. This pattern is particularly useful when an object has many optional parameters or when the construction process is complex.
+//

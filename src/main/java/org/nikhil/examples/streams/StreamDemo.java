@@ -26,12 +26,12 @@ public class StreamDemo {
         int sum = myList2.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+        System.out.println("Sum of all the elements of List => " + myList2 +" is = " + sum);
 
-        System.out.println("List => " + myList2);
         List<Integer> evenList = myList2.stream()
                 .filter(n -> n % 2 == 0)
-                .sorted().collect(Collectors.toList());
-        System.out.println("evenList => " + evenList);
+                .collect(Collectors.toList());
+        System.out.println("List of even numbers is => " + evenList);
 
         //with Exception Handling
         List<Integer> safeEvenList = myList2.stream()

@@ -69,3 +69,9 @@ public class StreamActorExample {
         }
     }
 }
+
+// Is there any design pattern used in this code? If yes, please explain the design pattern used in this code.
+// Yes, the code uses the **Actor Model** design pattern.
+// The Actor Model is a design pattern that treats "actors" as the fundamental units of computation. In this model, actors are independent entities that encapsulate state and behavior, and they communicate with each other exclusively through message passing. This approach allows for concurrent and distributed systems to be built more easily, as actors can operate in parallel without shared state, reducing the risk of race conditions and deadlocks.
+// In this code, the `Worker` and `Collector` classes are actors that process data concurrently. The `Worker` actor processes chunks of data and sends the results back to the `Collector actor, which aggregates the results. The use of actors allows for efficient parallel processing of data chunks, making the system scalable and responsive.
+// Real life examples of the Actor Model can be found in systems like Akka (used in this code), Erlang, and Microsoft Orleans, which are used for building highly concurrent, distributed, and fault-tolerant applications.

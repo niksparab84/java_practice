@@ -15,6 +15,12 @@ public class PrimeCheck {
         } else {
             System.out.println("Math.sqrt(" + num + ") = " + Math.sqrt(num));
             for (int i = 2; i <= Math.sqrt(num); i++) {
+                // why we are using Math.sqrt(num) because if a number is not prime, it must have a factor less than or equal to its square root.
+                // This reduces the number of iterations needed to check for primality.
+                // What if we use i<num? It will still work, but it will be less efficient, especially for large numbers.
+                // The square root method significantly reduces the number of checks needed.
+                // What will be the result of Math.sqrt of non-perfect squares? It will return a decimal value. For example, Math.sqrt(10) returns approximately 3.162.
+                // then the loop will run until i <= 3.162, which means it will check for factors 2 and 3. This is sufficient to determine if 10 is prime or not.
                 if (num % i == 0) {
                     isPrime = false;
                     break;

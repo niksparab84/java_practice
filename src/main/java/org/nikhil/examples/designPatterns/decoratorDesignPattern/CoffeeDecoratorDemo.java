@@ -109,4 +109,6 @@ public class CoffeeDecoratorDemo {
 // to existing classes without modifying their code.
 // The Decorator pattern is also commonly used in GUI frameworks to add visual enhancements to components, such as borders, scrollbars, or shadows,
 // without altering the underlying component classes.
+// On the client side, the Decorator pattern allows for a more modular and maintainable codebase, as it promotes composition over inheritance and encourages the use of interfaces to define behavior.
+
 

@@ -27,6 +27,7 @@ public class DistributedTransaction {
     //This ensures that the inventory service is not left with reserved stock that cannot be sold, and the payment service is not left with a failed transaction.
     //Design patterns like Saga or Event Sourcing can also be used to manage distributed transactions in microservices architecture.
 
+    // ** Saga Design Pattern **
     //Saga pattern involves breaking down a distributed transaction into smaller, independent transactions that can be executed in a sequence.
     //Each transaction in the saga can be compensated if it fails, allowing the overall transaction to be rolled back.
     //For example, in an e-commerce application, a saga can be used to manage the order placement process.

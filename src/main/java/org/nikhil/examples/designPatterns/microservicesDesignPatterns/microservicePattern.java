@@ -61,6 +61,10 @@ public class microservicePattern {
     // It enables load balancing and failover by providing a registry of available services and their instances.
     // Common tools for service discovery include Eureka, Consul and Zookeeper.
     // 3. Can you explain the difference between synchronous and asynchronous communication in microservices, and when to use each?
+    // Implementing a Custom Global Filter (e.g., for JWT Validation / Security Logging)
+    // Token Bucket algorithm is a rate-limiting algorithm that controls the rate of requests to a service. It works by maintaining a "bucket" of tokens, where each token represents a request that can be processed.
+    // When a request is made, a token is removed from the bucket. If the bucket is empty, the request is rejected or delayed until a token becomes available.
+    // The bucket is refilled at a fixed rate, allowing for a controlled flow of requests to the service.
 
     // Spring cloud components for microservices design patterns:
     // API Gateway can be implemented using Spring Cloud Gateway, which provides a simple way to route requests to different services.
@@ -142,6 +146,40 @@ public class microservicePattern {
     //  This helps maintain system stability and prevents overload on failing services.
     //  Example: If a payment service is down, the circuit breaker prevents further calls to it,
     //  allowing the system to return a fallback response or an error message to the client.
+    // Circuit Breaker Integration is Combining Spring Cloud Gateway with Resilience4j (Resilience4JCircuitBreakerFilterFactory) to implement a circuit breaker pattern for service calls.
+    // This integration allows you to define circuit breaker configurations, such as failure thresholds and wait durations and apply them to specific routes in the API Gateway.
+    // Three States of a Circuit Breaker are Closed, Open, and Half-Open. In the Closed state, requests flow normally. In the Open state, requests are blocked to prevent further failures.
+    // In the Half-Open state, a limited number of requests are allowed to test if the service has recovered. if the test requests succeed, the circuit breaker transitions back to the Closed state;
+    // otherwise, it returns to the Open state.
+    // Implementing Resilience4j in Spring Boot applications involves adding the Resilience4j dependency, configuring circuit breaker properties in application.yml or application.properties, and annotating service methods with @CircuitBreaker.
+    // Step1: Add Resilience4j dependency to your Spring Boot project.
+    // Code snippet for Maven:
+    // <dependency>
+    //     <groupId>io.github.resilience4j</groupId>
+    //     <artifactId>resilience4j-spring-boot3</artifactId>
+    // </dependency>
+    //
+    // Step2: Configure circuit breaker properties in application.yml or application.properties.
+    // Example configuration in application.yml:
+    // resilience4j:
+    //   circuitbreaker:
+    //     instances:
+    //       myServiceCircuitBreaker:
+    //         registerHealthIndicator: true
+    //         waitDurationInOpenState: 10s
+    //         slidingWindowType: COUNT_BASED
+    //         slidingWindowSize: 10
+    //         minimumNumberOfCalls: 5
+    //         failureRateThreshold: 50
+    //
+    // Step3: Annotate service methods with @CircuitBreaker to apply the circuit breaker pattern.
+    // Example:
+    // @Service
+    // public class MyService {
+    //     @CircuitBreaker(name = "myServiceCircuitBreaker", fallbackMethod = "fallbackMethod")
+    //     public String callExternalService() {
+    //         // Call to external service
+    //     }
 
     //- **Fallback:** Provides a default response when a service is unavailable.
     //  This pattern allows the system to return a predefined response or execute an alternative logic
@@ -171,9 +209,15 @@ public class microservicePattern {
     //- **Rate Limiting:** Controls the number of requests a service can handle in a given time.
     //  This pattern helps to protect services from being overwhelmed by too many requests.
     //  It limits the number of requests from a client or across all clients to ensure fair usage and prevent abuse.
-    //  Rate limiting can be implemented using various algorithms like token bucket, leaky bucket, or fixed window.
+    //  Rate limiting can be implemented using various algorithms like token bucket, leaky bucket or fixed window.
     //  Example: If a service allows 100 requests per minute, any requests beyond that limit will be rejected
     //  or delayed, ensuring that the service remains responsive and available to all clients.
+    // Here service means downstream service or upstream service? Service can refer to both downstream and upstream services, depending on the context.
+    // In a microservices architecture, services can be categorized as either downstream or upstream based on their role in the communication flow.
+    // So rate limiting can be applied to both downstream and upstream services to control the number of requests they can handle in a given time frame.
+    // Semaphores are a concurrency control mechanism that can be used to implement rate limiting. They allow you to limit the number of concurrent requests to a service
+    // by maintaining a count of available "permits" or "tokens". When a request is made, it acquires a permit from the semaphore.
+    // If no permits are available, the request is blocked or rejected until a permit becomes available.
 
     //- **Timeout:** Sets a maximum time for service calls to prevent hanging requests.
     //  This pattern ensures that service calls do not block indefinitely, allowing the system to recover from slow or unresponsive services.
@@ -183,7 +227,6 @@ public class microservicePattern {
     //  Example: If a service call takes longer than the specified timeout, it will be aborted,
     //  and the system can return a fallback response or an error message to the client.
 
-
     //- **Retry:** Automatically retries failed requests.
     //  This pattern allows the system to attempt a service call multiple times before giving up.
     //  It is useful for handling transient failures, such as network issues or temporary service unavailability.
@@ -191,12 +234,42 @@ public class microservicePattern {
     //  Exponential backoff is a strategy where the wait time between retries increases exponentially,
     //  which helps to reduce the load on the service and increases the chances of a successful response on subsequent attempts.
     //  Example: If a service call fails, it can be retried up to three times with increasing wait times between attempts.
+    // Core Concept: Automatically re-invokes a failed operation, assuming the failure is transient (e.g., a momentary network blip or database lock timeout).
+    //Configuration Best Practices:
+    //Exponential Backoff: Instead of retrying instantly (which worsens downstream congestion), increase the wait time exponentially between attempts (e.g. 200ms -> 400ms -> 800ms).
+    //Jitter: Add random variance (jitter) to backoff intervals to prevent synchronized "thundering herds" or retry storms where hundreds of microservice instances retry simultaneously at exact intervals.
+    //Exception Filtering: Only retry transient exceptions (e.g., TimeoutException, ConnectException). Never retry client-side errors like HTTP 400 Bad Request or 401 Unauthorized.
+    // Max Attempts: Limit the number of retries to avoid infinite loops and resource exhaustion. A common practice is to set a maximum of 3-5 attempts.
+    // Example Configuration:
+    // resilience4j.retry:
+    //  instances:
+    //    myServiceRetry:
+    //      maxAttempts: 3
+    //      waitDuration: 500ms
+    //      retryExceptions:
+    //        - java.io.IOException
+    //        - java.net.SocketTimeoutException
+    //      ignoreExceptions:
+    //        - org.springframework.web.client.HttpClientErrorException$BadRequest
+    //        - org.springframework.web.client.HttpClientErrorException$Unauthorized
+    //      enableExponentialBackoff: true
+    //      exponentialBackoffMultiplier: 2
 
     //- **Bulkhead:** Isolates failures to prevent them from affecting the whole system.
     //  This pattern divides the system into isolated components or "bulkheads" to contain failures.
     //  If one component fails, it does not impact the others, allowing the system to continue functioning.
     //  This is particularly useful in microservices architectures where services can fail independently.
     //  Example: If a payment service fails, it should not affect the user profile service.
+    // Core Concept: Borrowed from ship design (where water-tight compartments prevent a single hull breach from sinking the entire ship), the Bulkhead pattern isolates resources (like thread pools or semaphore counts) per remote service.
+    //Why We Need It: Without a bulkhead, if a downstream service hangs or becomes slow, all incoming threads in the caller's shared thread pool get blocked waiting for a response, starving other healthy parts of the application.
+    //Resilience4j Implementation Flavors:
+    //Semaphore Bulkhead: Limits the number of concurrent executions using a semaphore counter. It is lightweight, non-blocking, and ideal for reactive or event-driven applications (like WebFlux).
+    //ThreadPool Bulkhead: Uses a dedicated thread pool and a bounded queue per remote service. If the thread pool is exhausted, subsequent requests fail fast. This provides full thread isolation.
+    // Example Configuration:
+    //resilience4j.bulkhead:
+    //  instances:
+    //    myServiceBulkhead:
+    //      maxConcurrentCalls: 10
 
     //
     //**6. Observability Patterns**

@@ -57,8 +57,10 @@ public class Messaging {
     // 1. Topic does not exist: Ensure that the topic you are publishing to exists. You can create the topic using the Kafka command-line tools or programmatically using the Admin API.
     // 2. Consumer group mismatch: Ensure that the consumer is part of the same consumer group as the producer. If the consumer is in a different group, it will not receive messages
     // from the producer.
-    // 3. Offset management: Ensure that the consumer is configured to start reading from the correct offset. If the consumer is set to read from the latest offset, it will not receive messages that were published before it started. You can configure the consumer to read from the earliest offset or manage offsets manually.
-    // 4. Network issues: Ensure that there are no network issues preventing the consumer from connecting to the Kafka broker. Check firewall settings, network configurations, and ensure that the broker is reachable from the consumer.
+    // 3. Offset management: Ensure that the consumer is configured to start reading from the correct offset. If the consumer is set to read from the latest offset, it will not
+    // receive messages that were published before it started. You can configure the consumer to read from the earliest offset or manage offsets manually.
+    // 4. Network issues: Ensure that there are no network issues preventing the consumer from connecting to the Kafka broker. Check firewall settings, network configurations and
+    // ensure that the broker is reachable from the consumer.
     // 5. Serialization issues: Ensure that the producer and consumer are using compatible serializers and deserializers for the message format. If the producer is sending messages
     // in a format that the consumer cannot deserialize, the consumer will not be able to process the messages.
     // 6. Broker configuration: Ensure that the Kafka broker is configured correctly and is running. Check the broker logs for any errors or warnings that may indicate issues with message delivery.
@@ -66,13 +68,17 @@ public class Messaging {
     // in a timely manner. You can monitor consumer lag using Kafka monitoring tools or metrics.
     // 8. Message retention: Ensure that the messages are not being deleted from the topic before the consumer has a chance to read them. Check the topic's retention policy and adjust
     // it if necessary.
-    // 9. Consumer polling: Ensure that the consumer is actively polling for messages. If the consumer is not calling the poll() method regularly, it will not receive messages from the broker.
-    // 10. Logging and monitoring: Enable logging and monitoring for both the producer and consumer to identify any issues or errors that may be occurring during message production or consumption.
+    // 9. Consumer polling: Ensure that the consumer is actively polling for messages. If the consumer is not calling the poll() method regularly, it will not receive messages from
+    // the broker.
+    // 10. Logging and monitoring: Enable logging and monitoring for both the producer and consumer to identify any issues or errors that may be occurring during message production
+    // or consumption.
     // By systematically checking these potential causes, you should be able to diagnose and resolve the issue preventing the consumer from receiving messages from the producer in Kafka.
 
     // How does Kafka achieve high throughput and durability compared to traditional message queues, and what is the role of Partitions, Consumer Groups and Offsets?
     // Kafka achieves high throughput and durability through its distributed architecture, efficient data storage and message processing mechanisms. Here's how it works:
-    // 1. Partitions: Kafka topics are divided into partitions, which allow for parallel processing of messages. Each partition is an ordered, immutable sequence of records that can be read independently by multiple consumers. This enables Kafka to handle a large volume of messages and distribute the load across multiple brokers, improving throughput and scalability.
+    // 1. Partitions: Kafka topics are divided into partitions, which allow for parallel processing of messages. Each partition is an ordered, immutable sequence of records that
+    // can be read independently by multiple consumers. This enables Kafka to handle a large volume of messages and distribute the load across multiple brokers, improving throughput
+    // and scalability.
     // 2. Consumer Groups: Kafka allows consumers to be organized into consumer groups. Each consumer in a group reads messages from different partitions of a topic,
     // allowing for parallel processing of messages. This enables Kafka to scale horizontally, as more consumers can be added to a group to handle increased message load.
     // Additionally, consumer groups provide fault tolerance, as if one consumer fails, another consumer in the group can take over its partitions and continue processing messages.
@@ -116,7 +122,8 @@ public class Messaging {
     // How to avoid heartbeat timeout in Kafka? To avoid heartbeat timeouts in Kafka, you can take the following steps:
     // 1. Increase the heartbeat interval: You can configure the heartbeat interval for consumers to be longer, allowing them more time to send heartbeats before being considered dead.
     // 2. Optimize consumer processing: Ensure that your consumer application is processing messages efficiently and not blocking for extended periods of time, which could delay heartbeat messages.
-    // 3. Use a dedicated thread for heartbeats: Consider using a separate thread or executor to handle heartbeat messages, ensuring that they are sent on time even if the main processing thread is busy.
+    // 3. Use a dedicated thread for heartbeats: Consider using a separate thread or executor to handle heartbeat messages, ensuring that they are sent on time even if the main
+    // processing thread is busy.
     // 4. Monitor consumer health: Implement monitoring and alerting for your consumer applications to detect any issues that may cause heartbeat timeouts, such as high CPU usage
     // or memory leaks.
     // 5. Adjust session timeout: You can configure the session timeout for consumers to be longer, allowing them more time to send heartbeats before being considered dead.
@@ -233,8 +240,10 @@ public class Messaging {
     // For deduplication, you can implement idempotent producers and transactional messaging, as mentioned earlier. By using unique identifiers for messages and managing offsets carefully, you can ensure that messages are processed exactly once, even in the presence of failures or retries. Additionally, you can implement custom logic in your consumer application to detect and discard duplicate messages based on their unique identifiers, further enhancing deduplication capabilities.
 
     // How to traverse back in Kafka?
-    // Kafka does not provide a direct way to traverse back in the stream of messages. However, you can achieve this by managing offsets manually and seeking to specific positions in the topic. This approach requires careful handling of offsets and may impact performance.
-    // To traverse back in Kafka, you can use the seek() method of the KafkaConsumer class to set the consumer's position to a specific offset within a partition. This allows you to re-read messages from that point onward. Here's an example:
+    // Kafka does not provide a direct way to traverse back in the stream of messages. However, you can achieve this by managing offsets manually and seeking to specific positions in the topic.
+    // This approach requires careful handling of offsets and may impact performance.
+    // To traverse back in Kafka, you can use the seek() method of the KafkaConsumer class to set the consumer's position to a specific offset within a partition. This allows you to re-read messages
+    // from that point onward. Here's an example:
     // KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
     // consumer.subscribe(Arrays.asList("my-topic"));
     // consumer.poll(Duration.ofMillis(100)); // Initial poll to join the group and get partition assignments

@@ -44,6 +44,23 @@ public class microservicePattern {
     // to an external service or use JWT (JSON Web Tokens) for token-based authentication. For logging, Nginx provides built-in logging capabilities that can be customized using the `log_format` directive,
     // allowing you to log specific request and response details. For rate limiting, you can use the `limit_req` and `limit_conn` modules to control the number of requests per second or concurrent connections
     // from a client. Additionally, third-party plugins like `nginx-lua` can be used to implement more complex logic for authentication, logging and rate limiting.
+    // sample coding example for Nginx configuration:
+    // server {
+    //     listen 80;
+    //     server_name example.com;
+    //     location /api/ {
+    //         # Authentication using auth_request module
+    //         auth_request /auth;
+    //         # Logging
+    //         access_log /var/log/nginx/access.log combined;
+    //         # Rate limiting
+    //         limit_req zone=api_limit burst=10 nodelay;
+    //         proxy_pass http://backend_service;
+    //     }
+    //     location = /auth {
+    //         proxy_pass http://auth_service;
+    //     }
+    // }
 
     //  Elaborate more implementation: The API Gateway can be configured to define routes, filters, and predicates to control how requests are handled. It can also provide features like request aggregation,
     //  where it combines responses from multiple services into a single response for the client.
@@ -104,6 +121,18 @@ public class microservicePattern {
     //  It can be implemented using libraries like Ribbon or Spring Cloud LoadBalancer.
     //  The client retrieves the list of available service instances from the service registry and selects one based on the chosen algorithm.
     //  Example: A client can use round-robin or random selection to distribute requests across multiple instances of a service.
+    // sample code snippet for client-side load balancing using Spring Cloud LoadBalancer:
+    // @Service
+    // public class UserServiceClient {
+    //     private final RestTemplate restTemplate;
+    //     public UserServiceClient(RestTemplateBuilder restTemplateBuilder) {
+    //         this.restTemplate = restTemplateBuilder.build();
+    //     }
+    //     public User getUserById(String userId) {
+    //         String url = "http://user-service/users/" + userId;
+    //         return restTemplate.getForObject(url, User.class);
+    //     }
+    // }
 
     //- **Server-Side Load Balancing:** Load balancer routes requests to service instances.
     //  This pattern uses a load balancer to distribute incoming requests across multiple instances of a service.
@@ -148,7 +177,7 @@ public class microservicePattern {
     //  allowing the system to return a fallback response or an error message to the client.
     // Circuit Breaker Integration is Combining Spring Cloud Gateway with Resilience4j (Resilience4JCircuitBreakerFilterFactory) to implement a circuit breaker pattern for service calls.
     // This integration allows you to define circuit breaker configurations, such as failure thresholds and wait durations and apply them to specific routes in the API Gateway.
-    // Three States of a Circuit Breaker are Closed, Open, and Half-Open. In the Closed state, requests flow normally. In the Open state, requests are blocked to prevent further failures.
+    // Three States of a Circuit Breaker are Closed, Open and Half-Open. In the Closed state, requests flow normally. In the Open state, requests are blocked to prevent further failures.
     // In the Half-Open state, a limited number of requests are allowed to test if the service has recovered. if the test requests succeed, the circuit breaker transitions back to the Closed state;
     // otherwise, it returns to the Open state.
     // Implementing Resilience4j in Spring Boot applications involves adding the Resilience4j dependency, configuring circuit breaker properties in application.yml or application.properties, and annotating service methods with @CircuitBreaker.
@@ -205,6 +234,12 @@ public class microservicePattern {
     //  This pattern is particularly useful in microservices architectures where services need to communicate
     //  with each other frequently and require robust management of those interactions.
     //  Example: Istio and Linkerd are popular service mesh implementations that provide these capabilities.
+    // sample code snippet for implementing a service mesh using Istio:
+    // 1. Install Istio in your Kubernetes cluster.
+    // 2. Deploy your microservices with Istio sidecar injection enabled.
+    // 3. Configure Istio traffic management policies, such as routing rules, retries and circuit breakers using Istio's custom resource definitions (CRDs).
+    // 4. Monitor and observe service-to-service communication using Istio's built-in telemetry features, such as Prometheus metrics, Grafana dashboards and distributed tracing
+    // with Jaeger or Zipkin.
 
     //- **Rate Limiting:** Controls the number of requests a service can handle in a given time.
     //  This pattern helps to protect services from being overwhelmed by too many requests.

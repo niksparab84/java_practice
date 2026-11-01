@@ -2,6 +2,11 @@ package org.nikhil.examples.coreJava.numberChallenges;
 
 import java.util.Scanner;
 
+// What is prime number ?
+// A prime number is a whole number greater than 1 that has exactly two positive divisors: 1 and itself.
+// For example, 2, 3, 5, and 7 are prime. 4 is not prime because it can be divided evenly by 1, 2, and 4.
+// 1 is not prime because it has only one positive divisor.
+
 public class PrimeCheck {
 
     public static void main(String[] args) {

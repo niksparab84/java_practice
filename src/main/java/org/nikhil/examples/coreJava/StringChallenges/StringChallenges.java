@@ -28,7 +28,8 @@ public class StringChallenges {
         return true;
     }
 
-    //Write a method to check if a string is an anagram of another string
+    // Write a method to check if a string is an anagram of another string
+    // what is anagram?
     public static boolean isAnagram(String str1, String str2) {
         if (str1.length() != str2.length()) {
             return false;

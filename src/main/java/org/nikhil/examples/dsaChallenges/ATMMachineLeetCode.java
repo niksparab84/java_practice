@@ -1,8 +1,6 @@
 package org.nikhil.examples.dsaChallenges;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * https://leetcode.com/problems/design-an-atm-machine/
@@ -22,67 +20,66 @@ import java.util.List;
 
 public class ATMMachineLeetCode {
 
-    private static final int[] DENOMINATIONS = {20, 50, 100, 200, 500};
-    private List<int[]> resultList;
-    private int[] totalATMDenominations;
-    private int[] noTransaction;
+    private static final long[] DENOMINATIONS = {20, 50, 100, 200, 500};
+    private long[] totalATMDenominations;
 
     public ATMMachineLeetCode() {
-        resultList = new ArrayList<>();
-        totalATMDenominations = new int[] {0, 0, 0, 0, 0};
-        noTransaction = new int[] {-1};
+        totalATMDenominations = new long[] {0, 0, 0, 0, 0};
     }
 
     public void deposit(int[] banknotesCount) {
         for (int i = 0; i < banknotesCount.length; i++) {
-            totalATMDenominations[i] += banknotesCount[i];
+            depositAt(i, banknotesCount[i]);
+        }
+    }
+
+    public void deposit(long[] banknotesCount) {
+        for (int i = 0; i < banknotesCount.length; i++) {
+            depositAt(i, banknotesCount[i]);
         }
     }
 
     public int[] withdraw(int amount) {
-        int[] withdrawalDenominations = new int[5];
-        if(canWithdraw(amount)) {
-            for(int d = DENOMINATIONS.length - 1; d >= 0; d--) {
-                if(amount >= DENOMINATIONS[d]) {
-                    int requiredNotes = Math.abs(amount /  DENOMINATIONS[d]);
-                    if(requiredNotes > 0 && requiredNotes <= totalATMDenominations[d]) {
-                        // we can do withdrawal
-                        totalATMDenominations[d] -= requiredNotes;
-                        amount = amount - requiredNotes * DENOMINATIONS[d];
-                        withdrawalDenominations[d] = requiredNotes;
-                    } else {
-                        // if higher denomination can't cater withdrawal then no transaction
-                        withdrawalDenominations = noTransaction;
-                        break;
-                    }
-                }  else {
-                    // Withdrawal amt is less than denomination, hence 0 notes
-                    withdrawalDenominations[d] = 0;
-                }
-            }
-        } else {
-            withdrawalDenominations = noTransaction;
+        long[] result = withdraw((long) amount);
+        int[] withdrawalDenominations = new int[result.length];
+        for (int i = 0; i < result.length; i++) {
+            withdrawalDenominations[i] = Math.toIntExact(result[i]);
         }
+        return withdrawalDenominations;
+    }
 
+    public long[] withdraw(long amount) {
+        long[] withdrawalDenominations = calculateWithdrawal(amount);
+        if (withdrawalDenominations == null) {
+            return new long[] {-1};
+        }
+        for (int i = 0; i < withdrawalDenominations.length; i++) {
+            totalATMDenominations[i] -= withdrawalDenominations[i];
+        }
         return withdrawalDenominations;
     }
 
     public boolean canWithdraw(int amount) {
-        boolean canWithdraw = true;
-        for(int d = DENOMINATIONS.length - 1; d >= 0; d--) {
-            if(amount >= DENOMINATIONS[d]) {
-                int requiredNotes = Math.abs(amount / DENOMINATIONS[d]);
-                if (requiredNotes > 0 && requiredNotes <= totalATMDenominations[d]) {
-                    amount = amount - requiredNotes * DENOMINATIONS[d];
-                } else {
-                    canWithdraw = false;
-                }
-            }
+        return canWithdraw((long) amount);
+    }
+
+    public boolean canWithdraw(long amount) {
+        return calculateWithdrawal(amount) != null;
+    }
+
+    private void depositAt(int denominationIndex, long count) {
+        totalATMDenominations[denominationIndex] =
+                Math.addExact(totalATMDenominations[denominationIndex], count);
+    }
+
+    private long[] calculateWithdrawal(long amount) {
+        long[] withdrawalDenominations = new long[DENOMINATIONS.length];
+        for (int d = DENOMINATIONS.length - 1; d >= 0; d--) {
+            long requiredNotes = amount / DENOMINATIONS[d];
+            withdrawalDenominations[d] = Math.min(requiredNotes, totalATMDenominations[d]);
+            amount -= withdrawalDenominations[d] * DENOMINATIONS[d];
         }
-        if(amount > 0) {
-            canWithdraw = false;
-        }
-        return canWithdraw;
+        return amount == 0 ? withdrawalDenominations : null;
     }
 
     public static void main(String[] args) {

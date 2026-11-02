@@ -49,7 +49,7 @@ public class ATMCodingProblemHackerEarth {
                 for(int d = DENOMINATIONS.length - 1; d >= 0; d--) {
                     if(transactionAmt >= DENOMINATIONS[d]) {
                         int requiredNotes = Math.abs(transactionAmt / DENOMINATIONS[d] );
-                        if(requiredNotes > 0 && requiredNotes <= totalATMDenominations[d]) {
+                        if(requiredNotes > 0  && requiredNotes <= totalATMDenominations[d]) {
                             //we can do withdrawal
                             totalATMDenominations[d] -= requiredNotes;
                             transactionAmt = transactionAmt - requiredNotes * DENOMINATIONS[d];
@@ -84,7 +84,7 @@ public class ATMCodingProblemHackerEarth {
         //250 -1 -1 -1 -1 -1
         //int[] trans1 = {-1, 0, 1, 1, 1, 1};
         //int[] trans1 = {-1, 0, 1, 0, 1, 1};
-        int[] trans1 = {-1, 0, 1, 3, 0, 1};
+        int[] trans1 = {-1, 0, 10, 0, 0, 1};
         transactions[0] = trans1;
         int[] trans2 = {600, -1, -1, -1, -1, -1};
         transactions[1] = trans2;

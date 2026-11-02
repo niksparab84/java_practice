@@ -55,12 +55,12 @@ public class ATMCodingProblemHackerEarth {
                             transactionAmt = transactionAmt - requiredNotes * DENOMINATIONS[d];
                             withdrawalDenominations[d] = requiredNotes;
                         } else {
-                            // if higher denomination can't cater withdrawal then no tranaction
+                            // if higher denomination can't cater withdrawal then no transaction
                             withdrawalDenominations = noTransaction;
                             break;
                         }
                     } else {
-                        // Withdrawal amt is less then denomination, hence 0 notes
+                        // Withdrawal amt is less than denomination, hence 0 notes
                         withdrawalDenominations[d] = 0;
                     }
                 }

@@ -1,0 +1,46 @@
+𝗖𝗢𝗥𝗘 𝗝𝗔𝗩𝗔:
+1. Internal thread-safety mechanism of ConcurrentHashMap
+2. wait() vs sleep() vs join()
+3. Class loading mechanism: Bootstrap, Platform, Application
+4. equals() vs ==, and the equals()-hashCode() contract
+5. JVM garbage collection internals
+6. volatile vs synchronized
+7. Deep copy vs shallow copy
+8. Checked vs unchecked exceptions
+9. ThreadLocal, with a real-world use case
+10. Scenario: A payment gateway processes transactions in parallel. How do you ensure account balance consistency?
+
+𝗦𝗣𝗥𝗜𝗡𝗚 𝗔𝗡𝗗 𝗦𝗣𝗥𝗜𝗡𝗚 𝗕𝗢𝗢𝗧:
+11. @Bean vs @Component
+12. AOP and a practical use case
+13. How Spring resolves circular dependencies
+14. Securing REST APIs: JWT, OAuth2
+15. How auto-configuration works internally
+16. application.properties vs application.yml, and profiles
+17. ApplicationContext vs BeanFactory
+18. Scenario: Inventory update, payment deduction and invoice generation must execute as independent steps within a single order. How do you orchestrate this using Spring events or AOP?
+
+𝗝𝗣𝗔 𝗔𝗡𝗗 𝗛𝗜𝗕𝗘𝗥𝗡𝗔𝗧𝗘:
+19. get() vs load()
+20. First-level vs second-level cache
+21. Optimistic vs pessimistic locking
+22. Dirty checking
+23. Entity lifecycle states: transient, persistent, detached, removed
+24. Scenario: Multiple users update the same product's stock concurrently. Which JPA lock strategy applies, and why?
+
+𝗦𝗬𝗦𝗧𝗘𝗠 𝗗𝗘𝗦𝗜𝗚𝗡:
+25. E-commerce order tracking
+26. Rate limiter
+27. URL shortener
+28. Distributed key-value store (Redis-like)
+29. User authentication system
+
+1. 100 concurrent users hit your Spring Boot service. How does it handle the load?
+2. Creational design patterns: which ones have you used, and where?
+3. Events arrive out of order (timestamp, user ID, message). Sort them in batches of 100.
+4. A downstream service stops responding. Implement a circuit breaker.
+5. How does Kafka work? Name its core components.
+6. The producer is publishing, but the consumer receives nothing. Diagnose the root cause.
+7. A slow query with nested subqueries. Rewrite it using joins.
+8. Design a food delivery system. Identify the tables to index and define the sharding strategy.
+9. Design a Top K YouTube videos system.

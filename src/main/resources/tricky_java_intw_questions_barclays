@@ -1,0 +1,35 @@
+Preparing for a Senior Java Developer interview at Barclays?
+If you have 3–5+ years of experience in Java, Spring Boot and Microservices, these are the kind of challenging questions you should be prepared to tackle.
+
+1. Core Java – Deep Dive
+What happens internally when two different keys generate the same hashCode() in a HashMap? At what point does a bucket transform into a Red-Black Tree?
+Can a HashMap enter an infinite loop in a multithreaded environment? Explain the underlying reason.
+If two objects have the same hashCode() but are not equal, can both exist as keys in a HashMap?
+Can you override a static method in Java? What happens if the reference type and actual object type differ?
+Why can a Java method be overloaded based on compile-time types but overridden based on runtime types?
+What happens if a constructor calls an overridable method? What potential issue can arise?
+Can a class be immutable if it contains a mutable object? How would you design it correctly?
+
+2. Multithreading & Concurrency
+Two threads update the same ConcurrentHashMap key simultaneously. How does Java handle the operation internally?
+What is the difference between volatile and AtomicInteger? Can volatile guarantee thread safety for count++?
+How can deadlock occur even when synchronised blocks are used correctly? How would you troubleshoot it?
+What happens if CompletableFuture.thenApply() throws an exception? How would you recover without breaking the execution chain?
+Difference between thenApply(), thenCompose() and thenCombine() with practical scenarios.
+Your application has 200 threads, but only 10 database connections. What problems can occur, and how would you solve them?
+Can a thread pool become exhausted even when CPU utilization is low?
+How would you investigate a production issue where application threads are stuck in BLOCKED or WAITING state?
+
+3. Java Streams & JVM
+Why can a parallel stream perform worse than a sequential stream?
+What happens if you modify a collection while processing it using a Stream?
+Can you reuse a Java Stream after a terminal operation? What happens internally?
+What is the difference between StackOverflowError and OutOfMemoryError?
+
+4. Spring Boot & Hibernate – Tricky Scenarios
+What happens if a @Transactional method calls another @Transactional method within the same class?
+Why does @Transactional sometimes fail when applied to private methods?
+What happens if two Spring beans depend on each other? How would you resolve circular dependencies?
+How would you solve an N+1 query problem without blindly using FetchType.EAGER?
+What happens if a transaction commits successfully but the application crashes before publishing its Kafka event?
+♻️ Save and share this with developers preparing for Senior Java interviews.

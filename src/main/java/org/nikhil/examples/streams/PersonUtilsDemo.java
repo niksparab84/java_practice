@@ -75,6 +75,12 @@ public class PersonUtilsDemo {
                 .collect(Collectors.toList());
         System.out.println("minors = " + minors);
 
+        //find minors
+        List<Person> newMinors = persons.stream()
+                .filter(person -> person.getAge() < 18)
+                .collect(Collectors.toList());
+        System.out.println("newMinors = " + newMinors);
+
         persons.stream()
                 .sorted()
                 .map(Person::getName)

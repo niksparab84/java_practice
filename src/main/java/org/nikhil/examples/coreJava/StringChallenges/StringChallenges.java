@@ -54,7 +54,7 @@ public class StringChallenges {
         for (int i = 0; i < str.length(); i++) {
             char currentChar = str.charAt(i);
             if (!charSet[currentChar]) {
-                charSet[currentChar] = true;
+                charSet[currentChar] = true; // what is the use of this step here?
                 result.append(currentChar);
             }
         }

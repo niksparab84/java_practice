@@ -1,6 +1,7 @@
 package org.nikhil.examples.streams;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ArraysStreamDemo {
 
@@ -12,5 +13,9 @@ public class ArraysStreamDemo {
 
         //limit 5
         Arrays.stream(numbers).limit(5).forEach(System.out::print);
+
+        List<Integer> nums = Arrays.asList(4,5,6,7,8,9);
+
+        nums.forEach(n -> System.out.println(n));
     }
 }

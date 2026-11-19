@@ -2,6 +2,7 @@ package org.nikhil.examples.streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ public class StreamDemo {
     private List<Integer> myList = Arrays.asList(7000, 5000, 4000, 24000, 17000, 6000);
     private List<Integer> myList2 = Arrays.asList(5, 6, 9, 8, 7, 23, 12, 33, 45, 18, 13);
     Stream<Integer> stream = myList.stream();
+
 
     public void streamOperations() {
         System.out.println("List => " + myList);
@@ -27,6 +29,12 @@ public class StreamDemo {
                 .mapToInt(Integer::intValue)
                 .sum();
         System.out.println("Sum of all the elements of List => " + myList2 +" is = " + sum);
+
+        List<Integer> top3LargestList = myList2.stream()
+                .sorted(Comparator.reverseOrder())
+                .limit(3)
+                .collect(Collectors.toList());
+        System.out.println("Top 3 largest elements in the List => " + top3LargestList);
 
         List<Integer> evenList = myList2.stream()
                 .filter(n -> n % 2 == 0)
@@ -87,6 +95,10 @@ public class StreamDemo {
         StreamDemo streamDemo = new StreamDemo();
         streamDemo.streamOperations();
         streamDemo.timedStreamOperations();
+
+        final List<Integer> nums = List.of(1, 2);
+        nums.add(3); // This will throw UnsupportedOperationException because List.of() returns an immutable list
+        System.out.println("nums => " + nums);
     }
 
 }

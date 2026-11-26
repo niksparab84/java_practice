@@ -27,13 +27,19 @@ These questions are often presented as problem-solving scenarios.
 These are open-ended problems that require you to think about the entire system, not just a single piece of code.
 
 * **Problem:** Design a URL shortening service like Bitly.
-    * **Hint:** This is a very common question. Walk through the key components: **API design**, **database schema** (SQL vs. NoSQL), **hash function** for generating the short URL, **redirect mechanism**, and **scalability considerations** (handling a high volume of reads vs. writes). Discuss how you'd handle collisions and what a high-level architecture diagram would look like.
+    * **Hint:** This is a very common question. Walk through the key components: **API design**, **database schema** (SQL vs. NoSQL),
+    **hash function** for generating the short URL, **redirect mechanism**, and **scalability considerations** (handling a high volume of reads vs. writes).
+    Discuss how you'd handle collisions and what a high-level architecture diagram would look like.
+
 * **Problem:** Design a news feed system for a social media application.
-    * **Hint:** This problem focuses on data modeling, scalability, and handling fan-out. Talk about a **push model (fan-out on write)** vs. a **pull model (fan-out on read)**. Discuss the use of message queues (e.g., Kafka) and caching (e.g., Redis).
+    * **Hint:** This problem focuses on data modeling, scalability, and handling fan-out. Talk about a push model (fan-out on write) vs. a pull model (fan-out on read)
+    **. Discuss the use of message queues (e.g., Kafka) and caching (e.g., Redis).
 * **Problem:** You need to build a rate limiter for an API. How would you design a distributed, fault-tolerant rate limiter?
-    * **Hint:** Mention algorithms like **Token Bucket** or **Leaky Bucket**. The key is to address the "distributed" aspect. Discuss using a shared data store like Redis to maintain counters across multiple application instances.
+    * **Hint:** Mention algorithms like **Token Bucket** or **Leaky Bucket**. The key is to address the "distributed" aspect. Discuss using a shared data store
+    like Redis to maintain counters across multiple application instances.
 * **Problem:** How would you design an online multiplayer game's matchmaking system?
-    * **Hint:** This is about queues, matching algorithms, and real-time communication. Talk about separating players into tiers, using an in-memory database for speed, and the **trade-offs between finding a perfect match and reducing wait times**.
+    * **Hint:** This is about queues, matching algorithms, and real-time communication. Talk about separating players into tiers, using an in-memory database
+    for speed, and the **trade-offs between finding a perfect match and reducing wait times**.
 
 ***
 ### 3. Behavioral & Leadership Questions

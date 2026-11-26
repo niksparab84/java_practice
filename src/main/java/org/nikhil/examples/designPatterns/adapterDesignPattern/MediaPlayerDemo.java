@@ -56,3 +56,11 @@ public class MediaPlayerDemo {
 // 3. Payment gateways: When integrating multiple payment gateways into an e-commerce platform, adapters can be used to
 // standardize the interface for processing payments, allowing the platform to work with different payment providers seamlessly.
 
+// trick to remember adapter design pattern is "Think of a power adapter that allows you to plug in your device into a different type of electrical outlet."
+// The adapter design pattern allows incompatible interfaces to work together, just like a power adapter allows you to use your device with different types of electrical outlets.
+// trick to remember code implementation of adapter design pattern is "Think of the MediaAdapter class as a power adapter that allows the MediaPlayer interface to work with the AdvancedMediaPlayer class."
+// The MediaAdapter class acts as an adapter that converts the interface of the AdvancedMediaPlayer class into the interface expected by the MediaPlayer interface, allowing them to work together seamlessly.
+// The adapter design pattern is particularly useful in scenarios where you have existing code that you want to reuse, but the interfaces are incompatible. By using an adapter, you can create a bridge between the two interfaces, allowing them to work together without modifying the existing code.
+// The adapter design pattern promotes code reusability and flexibility, making it easier to integrate new functionality into existing systems without breaking existing code.
+// The adapter design pattern is also known as the wrapper pattern, as it wraps an existing class with a new interface, allowing it to be used in a different context.
+
